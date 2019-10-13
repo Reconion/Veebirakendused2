@@ -41,3 +41,11 @@ function contentSelector() {
         content.parent().children("div").not(content).removeClass("active");
     })
 }
+function toggle() {
+    var id = document.getElementById("add-course");
+    if (id.style.display === "none"){
+        id.style.display = "block";
+    } else {
+        id.style.display = "none";
+    }
+}
