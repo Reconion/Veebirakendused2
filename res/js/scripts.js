@@ -7,15 +7,8 @@ function coursesList() {
 }
 function populateHTML() {
     //initialize user and courses
-    let user = new User("John", "Doe", "11-10-1990", "Software Engineering", 2.75);
     let courses = coursesList();
 
-    //populate Profile
-    // language=JQuery-CSS
-    $("#name").text(user.firstname + " " + user.lastname);
-    $("#birthdate").text(user.birthdate);
-    $("#faculty").text(user.faculty);
-    $("#gpa strong").text(user.gpa);
     //populate Courses
     $(courses).each(function () {
         var rowCount = $("#courses tr").length;
@@ -28,6 +21,14 @@ function populateHTML() {
             "</tr>"
         )
     });
+
+    let user = new User("John", "Doe", "11-10-1990", "Software Engineering", countGPA());
+    //populate Profile
+    // language=JQuery-CSS
+    $("#name").text(user.firstname + " " + user.lastname);
+    $("#birthdate").text(user.birthdate);
+    $("#faculty").text(user.faculty);
+    $("#gpa strong").text(user.gpa);
 }
 function contentSelector() {
     $(".controls button").click(function () {
@@ -48,4 +49,54 @@ function toggle() {
     } else {
         id.style.display = "none";
     }
+}
+
+function saveCourse() {
+    let title = document.getElementById("title").value;
+    let semester = parseInt(document.getElementById("semester").value);
+    let grade = parseInt(document.getElementById("grade").value);
+    $(courses).each(function () {
+        var rowCount = $("#courses tr").length;
+        $("#courses tbody").append(
+            "<tr>" +
+            "<td>" + rowCount +"</td>" +
+            "<td>" + title +"</td>" +
+            "<td>" + semester +"</td>" +
+            "<td>" + grade +"</td>" +
+            "</tr>"
+        )
+    });
+    title = document.getElementById("title").value='';
+    semester = parseInt(document.getElementById("semester").value='');
+    grade = parseInt(document.getElementById("grade").value='');
+    toggle();
+    $("#gpa strong").text(countGPA());
+}
+
+function countGPA() {
+    let allGrades = 0;
+    let table = document.getElementById("courses");
+    let rowsNR = table.rows.length;
+    for (let i=1; i < rowsNR; i++) {
+        let grade = table.rows[i].cells[3].innerHTML;
+        if(grade>90){
+            allGrades += 4;
+        }
+        else if (grade>80){
+            allGrades += 3;
+        }
+        else if (grade>70) {
+            allGrades += 2;
+        }
+        else if (grade>60) {
+            allGrades += 1;
+        }
+        else if (table.rows[i].cells[2].firstChild.value>50) {
+            allGrades += 0.5;
+        }
+        else if (grade<=50) {
+            allGrades += 0;
+        }
+    }
+    return Math.round(allGrades/(rowsNR-1)* 100) /100;
 }
