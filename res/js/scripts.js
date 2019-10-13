@@ -19,7 +19,6 @@ function populateHTML() {
     //populate Courses
     $(courses).each(function () {
         var rowCount = $("#courses tr").length;
-        console.log(rowCount);
         $("#courses tbody").append(
             "<tr>" +
             "<td>" + rowCount +"</td>" +
