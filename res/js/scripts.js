@@ -43,12 +43,17 @@ function contentSelector() {
     })
 }
 function toggle() {
-    var id = document.getElementById("add-course");
-    if (id.style.display === "none"){
-        id.style.display = "block";
-    } else {
-        id.style.display = "none";
-    }
+    $("#add-course-button").click(function(){
+        $("#add-course").toggle();
+    });
+}
+function cancel(){
+    $("#cancel-course").click(function () {
+        $("#add-course").toggle();
+        $("#title").val('');
+        $("#semester").val('');
+        $("#grade").val('');
+    })
 }
 
 function saveCourse() {
@@ -66,10 +71,10 @@ function saveCourse() {
             "</tr>"
         )
     });
-    title = $("#title").val('');
-    semester = parseInt($("#semester").val(''));
-    grade = parseInt($("#grade").val(''));
-    toggle();
+    $("#title").val('');
+    $("#semester").val('');
+    $("#grade").val('');
+    $("#add-course").toggle();
     $("#gpa strong").text(countGPA());
 }
 
