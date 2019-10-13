@@ -9,6 +9,16 @@
     <link href="https://fonts.googleapis.com/css?family=Livvic&display=swap" rel="stylesheet">
     <title>My Dashboard</title>
     <script type="text/javascript" src="res/js/jquery-3.4.1.min.js"> </script>
+    <script type="text/javascript" src="res/js/User.js"> </script>
+    <script type="text/javascript" src="res/js/Course.js"> </script>
+    <script type="text/javascript" src="res/js/scripts.js"> </script>
+
+    <script>
+        $(document).ready(function() {
+            populateHTML();
+        })
+
+    </script>
 </head>
 <body>
 <main>
@@ -25,13 +35,13 @@
                         </div>
                         <div class="info">
                             <ul>
-                                <li id="name">John Doe</li>
-                                <li id="birthdate">11/10/1990</li>
-                                <li id="faculty">Software Engineering</li>
+                                <li id="name"></li>
+                                <li id="birthdate"></li>
+                                <li id="faculty"></li>
                             </ul>
                         </div>
                         <div id="gpa">
-                            <strong>2.75</strong>
+                            <strong></strong>
                         </div>
                         <div class="clear-fix"></div>
                     </div>
