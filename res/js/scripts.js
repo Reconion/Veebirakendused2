@@ -52,9 +52,9 @@ function toggle() {
 }
 
 function saveCourse() {
-    let title = document.getElementById("title").value;
-    let semester = parseInt(document.getElementById("semester").value);
-    let grade = parseInt(document.getElementById("grade").value);
+    let title = $("#title").val();
+    let semester = parseInt($("#semester").val());
+    let grade = parseInt($("#grade").val());
     $(courses).each(function () {
         var rowCount = $("#courses tr").length;
         $("#courses tbody").append(
@@ -66,19 +66,18 @@ function saveCourse() {
             "</tr>"
         )
     });
-    title = document.getElementById("title").value='';
-    semester = parseInt(document.getElementById("semester").value='');
-    grade = parseInt(document.getElementById("grade").value='');
+    title = $("#title").val('');
+    semester = parseInt($("#semester").val(''));
+    grade = parseInt($("#grade").val(''));
     toggle();
     $("#gpa strong").text(countGPA());
 }
 
 function countGPA() {
     let allGrades = 0;
-    let table = document.getElementById("courses");
-    let rowsNR = table.rows.length;
-    for (let i=1; i < rowsNR; i++) {
-        let grade = table.rows[i].cells[3].innerHTML;
+    $("#courses tbody tr td:nth-child(4)").each(function () {
+        var grade = $(this).html();
+
         if(grade>90){
             allGrades += 4;
         }
@@ -91,12 +90,12 @@ function countGPA() {
         else if (grade>60) {
             allGrades += 1;
         }
-        else if (table.rows[i].cells[2].firstChild.value>50) {
+        else if (grade>50) {
             allGrades += 0.5;
         }
         else if (grade<=50) {
             allGrades += 0;
         }
-    }
-    return Math.round(allGrades/(rowsNR-1)* 100) /100;
+    });
+    return Math.round(allGrades/($("#courses tr").length-1)* 100) /100;
 }
