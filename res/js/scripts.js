@@ -29,3 +29,15 @@ function populateHTML() {
         )
     });
 }
+function contentSelector() {
+    $(".controls button").click(function () {
+        //change active button
+        $(this).addClass("active");
+        $(this).parent().children("button").not(this).removeClass("active");
+        //change active div
+        const contentIdString = this.id.split("-")[0];
+        const content = $("[id^=" + contentIdString + "]");
+        content.addClass("active");
+        content.parent().children("div").not(content).removeClass("active");
+    })
+}
